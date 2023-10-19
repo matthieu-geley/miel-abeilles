@@ -19,16 +19,6 @@
     Vous devrez donc ajouter la possibilité de générer un graphe de points (représentants les positions des fleurs) reliés les uns aux autres afin de représenter le chemin de la meilleure abeille de la dernière génération étudiée.
     Affichez son arbre généalogique. Vous devez aussi générer un graphe représentant l'évolution du temps de parcours moyen d’une génération d’abeille au cours du temps.
 
-## Algorithme
-
-    L’algorithme génétique utilisé est le suivant :
-        1. Générer une population d’abeilles aléatoirement
-        2. Evaluer la fitness de chaque abeille
-        3. Sélectionner les abeilles les plus performantes
-        4. Générer une nouvelle population d’abeilles à partir des abeilles sélectionnées
-        5. Faire la mutation d'une partie de la population toutes
-        6. Répéter les étapes 2 à 5 jusqu’à ce qu’une condition d’arrêt soit atteinte
-
 ## Structure du code
 
     Le code est composé de deux fichiers et un dossier contenant les données ressources :
@@ -49,9 +39,9 @@ pip install -r requirements.txt
 
     Ensuite, il vous faut ouvrir le fichier `main.py` et modifier les paramètres de l'algorithme génétique. Les paramètres sont les suivants :
 
-- range(**int**) : nombre de générations ligne 9
+- range(**integrer**) : nombre de générations ligne 9
 
-- n % (**int**) : fréquence de mutation ligne 10
+- n % (**integrer**) : fréquence de mutation ligne 10
 
     Pour finir exécuter le fichier `main.py` dans le terminal :
 
@@ -59,62 +49,40 @@ pip install -r requirements.txt
 Python3 main.py
 ```
 
-Here are some ways you could optimize the bee colony optimization code:
+## Algorithme et fonctionnement
 
-- Use Numpy vectors and operations instead of basic Python lists and loops where possible. This will speed up things like calculating distances.
+    L’algorithme utilisé dans ce projet est le suivant :
 
-- Limit copying of lists. For example, in `repopulate()`, you could generate the child bee lists in place rather than making copies. 
+1. On **génére** une population d’abeilles aléatoirement, chaque abeille est une solution potentielle pour relier chaque point du champ de fleurs.
 
-- Reduce overall complexity. Some parts like `move()` seem more complex than needed. You may be able to simplify the logic.
+2. **Evaluation** du score de fitness de chaque abeille en calculant la distance totale parcourue par l’abeille.
 
-- Add flexibility for parameters like population size, number of generations, etc to be set as inputs rather than hardcoding.
+3. **Sélection** des abeilles les plus performantes afin de les faire se reproduire.
 
-- Use memoization to cache computed fitness values rather than recomputing.
+4. **Reproduction** des abeilles sélectionnées afin de générer une nouvelle population d’abeilles.
 
-- Parallelize fitness evaluation and breeding steps across bees.
+5. Faire la **mutation** d'une partie de la population à intervalle régulier.
 
-- Optimize data layout to improve locality and cache utilization. For example store flowers and bees in separate contiguous arrays.
+6. **Répéter** les étapes 2 à 5 jusqu’à ce qu’une condition d’arrêt soit atteinte.
 
-- Profile the code to identify hot spots and focus optimization there. 
+    La condition d’arrêt actuel est le nombre de générations.
 
-- Consider moving the expensive inner loops like fitness evaluation to compiled code (C/C++ extension or Numba) rather than plain Python.
+## Visualisation des résultats
 
-- Use more efficient data structures like Sets vs Lists in some places.
+### Parcours la meilleure abeille de la dernière génération
 
-- Reduce number of copies made, reuse objects where possible.
+![image](image 1)
 
-So in summary, leverage Numpy, reduce complexity, parallelize, use memoization and caching, profile and optimize hotspots, and consider moving inner loops to compiled code. That should help significantly speed up the implementation.
+### Evolution du temps de parcours moyen d’une génération d’abeille au cours du temps
 
-Based on a quick analysis of the bee colony optimization code you provided:
+![image](image 2)
 
-The overall big O is dominated by the `repopulate()` method, which is O(n^2) due to the nested loops over the bees lists to select random parents and generate offspring.
+### Evolution de la distance parcouru par la meilleur abeille au cours du temps
 
-Specifically:
+![image](image 3)
 
-- `generate()` is O(n) where n is the population size. Simple loop to generate bees.
+## Conclusion
 
-- `move()` is O(n) where n is number of flowers. Calculates fitness.
-
-- `evaluate()` is O(n log n) due to sorting the bees by fitness.
-
-- `repopulate()` is O(n^2) as explained above. Two nested loops over bees.
-
-- `mutate()` is O(1). Mutates a single random bee.
-
-- `average()` is O(n) to calculate average fitness.
-
-- `visualize_best_bee()` is O(n) to plot bee path. 
-
-- `visualize_average_generation()` is O(n) to plot fitness over generations.
-
-So the repopulation step dominates with O(n^2) complexity. The overall algorithm is likely running in O(g * n^2) time where g is the number of generations.
-
-Some ways to improve this:
-
-- Use a more efficient parent selection and breeding approach.
-
-- Parallelize the loops to reduce effective time complexity.
-
-- Reduce number of generations g.
-
-- Limit population size n per generation.
+On peut voir que la distance parcourue par la meilleure abeille diminue au fil des générations.
+On peut aussi voir que le temps de parcours moyen diminue au fil des générations.
+On peut donc en conclure que les abeilles ont appris à parcourir le champ de fleurs de manière plus efficace.
