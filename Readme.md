@@ -54,7 +54,7 @@ Python3 main.py
 
 L’algorithme utilisé dans ce projet est le suivant :
 
-1. On **génére** une population d’abeilles aléatoirement, chaque abeille est une solution potentielle pour relier chaque point du champ de fleurs.
+1. On **génère** une population d’abeilles aléatoirement, chaque abeille est une solution potentielle pour relier chaque point du champ de fleurs.
 
 2. **Evaluation** du score de fitness de chaque abeille en calculant la distance totale parcourue par l’abeille.
 
@@ -70,15 +70,15 @@ L’algorithme utilisé dans ce projet est le suivant :
 
 ## Visualisation des résultats
 
-### Parcours la meilleure abeille de la dernière génération
+### Parcours de la meilleure abeille de la dernière génération
 
 ![image](https://github.com/matthieu-geley/miel-abeilles/assets/115145423/8fa772ca-03db-4047-b77c-098ad325261e)
 
-### Evolution du temps de parcours moyen d’une génération d’abeille au cours du temps
+### Evolution de la distance parcourue en moyenne par une génération d’abeille au fil du temps
 
 ![image](https://github.com/matthieu-geley/miel-abeilles/assets/115145423/120907a8-710e-4398-9bc6-ab62ddbf624c)
 
-### Evolution de la distance parcouru par la meilleur abeille au cours du temps
+### Evolution de la distance parcourue par la meilleur abeille au fil du temps
 
 ![image](https://github.com/matthieu-geley/miel-abeilles/assets/115145423/07b4935f-6f11-4612-924a-1d6cd06fda34)
 
