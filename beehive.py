@@ -4,9 +4,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 class Bee:
-
-	def __init__(self, id=0):
-		self.id = id
+	
+	def __init__(self):
 		self.flowerList = []
 		self.fitness = 0
 
@@ -30,10 +29,11 @@ class Bee:
 			x2, y2 = self.flowerList[(i+1) % len(self.flowerList)]
 			self.fitness += int(math.sqrt((x1 - x2)**2 + (y1 - y2)**2))
 
+
+
 class Hive:
 
 	def __init__(self) -> None:
-		self.population = 0
 		self.beeList = []
 		self.bestBees = []
 		self.bees = []
@@ -41,16 +41,14 @@ class Hive:
 
 	def generate(self):
 		for i in range(100):
-			bee = Bee(i)
+			bee = Bee()
 			bee.random()
 			self.bees.append(bee)
-			self.beeList.append((bee.id, bee.fitness))
+			self.beeList.append(bee.fitness)
 
 	def generateChild(self, flowerlist1, flowerlist2):
-		babyBee1 = Bee(self.population)
-		self.population += 1
-		babyBee2 = Bee(self.population)
-		self.population += 1
+		babyBee1 = Bee()
+		babyBee2 = Bee()
 		babyBee1.flowerList = flowerlist1
 		babyBee2.flowerList = flowerlist2
 		babyBee1.move()
@@ -71,13 +69,13 @@ class Hive:
 			randomBee2 = random.choice(usableBees)
 			usableBees.remove(randomBee2)
 
-			p1h1 = randomBee1.flowerList[:len(randomBee1.flowerList)//2]
-			p1h2 = [x for x in randomBee2.flowerList if x not in p1h1]
-			p2h1 = randomBee2.flowerList[:len(randomBee2.flowerList)//2]
-			p2h2 = [x for x in randomBee1.flowerList if x not in p2h1]
+			parent1half1 = randomBee1.flowerList[:len(randomBee1.flowerList)//2]
+			parent1half2 = [x for x in randomBee2.flowerList if x not in parent1half1]
+			parent2half1 = randomBee2.flowerList[:len(randomBee2.flowerList)//2]
+			parent2half2 = [x for x in randomBee1.flowerList if x not in parent2half1]
 
-			mergedList = p1h1 + p1h2
-			mergedList2 = p2h1 + p2h2
+			mergedList = parent1half1 + parent1half2
+			mergedList2 = parent2half1 + parent2half2
 
 			babyBee1, babyBee2 = self.generateChild(mergedList, mergedList2)
 
