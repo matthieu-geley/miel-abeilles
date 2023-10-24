@@ -10,7 +10,7 @@ class Bee:
 		self.fitness = 0
 
 	def csvParse(self):
-		df = pd.read_csv('Resources\Flowers.csv', header=0)
+		df = pd.read_csv('Resources/Flowers.csv', header=0)
 		return [(x, y) for x, y in zip(df['x'], df['y'])]
 
 	def random(self):
